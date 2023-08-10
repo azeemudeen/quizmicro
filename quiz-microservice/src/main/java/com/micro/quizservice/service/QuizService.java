@@ -1,8 +1,6 @@
 package com.micro.quizservice.service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,16 +39,7 @@ public class QuizService {
 	}
 
 	public ResponseEntity<Integer> calculateResult(int id, List<Response> responses) {
-		Quiz quiz = quizRepository.findById(id).get();
-//		List<Question> questions = quiz.getQuestions();
-		int right = 0;
-//		for(Response response: responses) {
-//			for(Question question: questions) {
-//				if(response.getResponse().equals(question.getRightAnswer())) {
-//					right++;
-//				}				
-//			}
-//		}
-		return ResponseEntity.ok(right);
+		int result = quizInterface.getScore(responses).getBody();
+		return ResponseEntity.ok(result);
 	}
 }
